@@ -2,6 +2,8 @@ import  express  from 'express';
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
 import postRoutes from "./src/routes/posts.route.js";
 import userRoutes from "./src/routes/users.route.js";
 import dotenv from "dotenv";
@@ -10,9 +12,14 @@ const app = express();
 
 dotenv.config();
 
-app.use(bodyParser.json({limit: "30mb", extended:true}));
-app.use(bodyParser.urlencoded({limit: "30mb", extended:true}));
-app.use(cors());
+app.use(bodyParser.json({limit: "10mb", extended:true}));
+app.use(bodyParser.urlencoded({limit: "10mb", extended:true}));
+app.use(cors({
+    origin: ["https://memories-gallary.netlify.app", "http://localhost:3000"], // أضف رابط Netlify هنا
+    credentials: true
+}));
+app.use(helmet()); // يحمي السيرفر من هجمات الـ Headers الشائعة
+app.use(compression()); // يقلل حجم البيانات المرسلة للمتصفح لتسريع التحميل
 
 const PORT = process.env.PORT || 3000;
 
