@@ -12,8 +12,8 @@ const app = express();
 
 dotenv.config();
 
-app.use(bodyParser.json({limit: "20mb", extended:true}));
-app.use(bodyParser.urlencoded({limit: "20mb", extended:true}));
+app.use(bodyParser.json({limit: "30mb", extended:true}));
+app.use(bodyParser.urlencoded({limit: "30mb", extended:true}));
 app.use(cors({
     origin: ["https://memories-gallary.netlify.app", "http://localhost:3000"], // أضف رابط Netlify هنا
     credentials: true
